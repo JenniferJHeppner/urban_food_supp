@@ -14,6 +14,8 @@ All R code and data within the repository can be found in the corresponding fold
   - `Adult_Cort.csv`:
 
 - `Figures`: Contains all R code to replicate figures in the manuscript.
+  - `Main_Manuscript_Figures.R`: Script to reproduce Figures 1 and 2 found in the main text using: `yolk_hormones.csv`, `Nestling_Cort.csv`, `Adult_Cort.csv`, `Frass_20-22.csv`, `Egg_Morphology.csv`, `Nestling_Morphology.csv`, and `Adult_Morphology.csv`.
+  - `Supplementary_Figures.R`: Script to reproduce figures found in the Supplementary Materials using: `Yolk_Validations.csv`, `Nestling_Plasma_Validations.csv`, `yolk_hormones.csv`, and `Egg_Morphology.csv`.
 
 - `R_Main`: Contains all R scripts of main analyses in the manuscript including 1) Yolk hormones (corticosterone, testosterone, and thyroxine) and yolk mass; 2) Egg morphology; 3) Nestling corticosterone; 4) Nestling morphology; 5) Adult corticosterone; and 6) Adult morphology.
 
