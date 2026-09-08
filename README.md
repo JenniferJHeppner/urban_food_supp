@@ -13,10 +13,12 @@ All R code and data within the repository can be found in the corresponding fold
 - `Data`: Contains all data used in the manuscript.
   - `Adult_Cort.csv`:
 
+- `Figures` Folder: Contains all R code to replicate figures in the manuscript.
+
 - `R_Main` Folder: Contains all R scripts of main analyses in the manuscript including 1) Yolk hormones (corticosterone, testosterone, and thyroxine) and yolk mass; 2) Egg morphology; 3) Nestling corticosterone; 4) Nestling morphology; 5) Adult corticosterone; and 6) Adult morphology.
 
 - `R_Supp` Folder: Contains R scripts for supplementary analyses including 1) Caterpillar frass biomass and 2) Nesting success (clutch size, hatching brood size, and fledging brood size).
 
-- `Figures` Folder: Contains all R code to replicate figures in the manuscript.
+
 
 
