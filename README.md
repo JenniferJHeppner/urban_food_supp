@@ -15,16 +15,31 @@ All R code and data within the repository can be found in the corresponding fold
 
 
 - `Figures`: Contains all R code to replicate figures in the manuscript.
+  
   - `Main_Manuscript_Figures.R`: Script to reproduce Figures 1 and 2 found in the main text using: `yolk_hormones.csv`, `Nestling_Cort.csv`, `Adult_Cort.csv`, `Frass_20-22.csv`, `Egg_Morphology.csv`, `Nestling_Morphology.csv`, and `Adult_Morphology.csv`.
     
   - `Supplementary_Figures.R`: Script to reproduce figures found in the Supplementary Materials using: `Yolk_Validations.csv`, `Nestling_Plasma_Validations.csv`, `yolk_hormones.csv`, and `Egg_Morphology.csv`.
 
 
-- `R_Main`: Contains all R scripts of main analyses in the manuscript including 1) Yolk hormones (corticosterone, testosterone, and thyroxine) and yolk mass; 2) Egg morphology; 3) Nestling corticosterone; 4) Nestling morphology; 5) Adult corticosterone; and 6) Adult morphology.
+- `R_Main`: Contains all R scripts of main analyses in the manuscript:
+  
+  - `Adult_Cort.R`: Uses `Adult_Cort.csv` to analyse adult corticosterone data.
+    
+  - `Adult_Morphology.R`: Uses `Adult_Morphology.csv` to analyze adult morphology metrics, including mass and body condition.
+    
+  - `Egg_Morphology.R`: Uses `Egg_Morphology.csv` to analyze egg morphology metrics, including mass and volume.
+    
+  - `Nestling_Cort.R`: Uses `Nestling_Cort.csv` to analyze nestling corticosterone data.
+    
+  - `Nestling_Morphology.R`: Uses `Nestling_Morphology.csv` to analyze nestling morphology metrics, including mass and body condition.
+    
+  - `Yolk_Hormones_and_Mass.R`: Uses `yolk_hormones.csv` to analyze yolk hormone levels (corticosterone, testosterone, and thyroxine) as well as morphology (mass).
+  
 
 
-- `R_Supp`: Contains R scripts for supplementary analyses including 1) Caterpillar frass biomass and 2) Nesting success (clutch size, hatching brood size, and fledging brood size).
 
-
-
-
+- `R_Supp`: Contains R scripts for supplementary analyses.
+  
+  - `Frass_Biomass.R`: Uses `Frass_20-22.csv` to analyze caterpillar frass biomass.
+    
+  - `Nesting_Success.R`: Uses `nest_info.csv` to analyze clutch size, hatching brood size, and fledging brood size.
