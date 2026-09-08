@@ -11,7 +11,25 @@ Urbanization results in the emergence of unique organismal phenotypes; however, 
 All R code and data within the repository can be found in the corresponding folders.
 
 - `Data`: Contains all data used in the manuscript.
-  - `Adult_Cort.csv`:
+  - `Adult_Cort.csv`: Individual-level data on adult house wren baseline corticosterone concentrations. Contains columns for individual sample ID, nest ID, site (U - urban, R - rural, N - natural), food treatment (C - control, T - food treated), biological sex, individual band ID, date, year, time of day, nest brood size, total time to complete blood sample (in seconds), mass, and corticosterone concentration in ng.
+ 
+  - `Adult_Morphology.csv`: Individual-level data on adult house wren morphology. Contains columns for nest ID, site (U - urban, R - rural, N - natural), food treatment (C - control, T - food treated), biological sex, individual band ID, year, date, time of day, nest brood size, tarsus length, wing length, mass.
+ 
+  - `Egg_Morphology.csv`: Individual-level data on house wren egg morphology. Contains columns for nest ID, site (U - urban, R - rural, N - natural), food treatment (C - control, T - food treated), egg-laying order, whether the egg was removed from the nest for hormone extraction or left to develop naturally, year, date, nest clutch size, date food tray was installed, `supp_days` (current number of days that specific egg received food supplementation), `num_supp_day` (total number of days the entire clutch of eggs received food supplementation up to the 1st egg laid), time of day, length of egg, width of egg, and mass.
+ 
+  - `Frass_20-22.csv`: Repeated caterpillar frass measurements across sites and the entire breeding season. Contains columns for frass net ID,  site (U - urban, R - rural, N - natural), date, year, dry frass mass (in grams), dry frass mass (in mg), Julian date, ambient temperature, and biomass.
+ 
+  - `Nestling_Cort.csv`: Individual-level data on nestling house wren baseline corticosterone concentrations at fledging. Contains columns for individual sample ID, nest ID, site (U - urban, R - rural, N - natural), food treatment (C - control, T - food treated), individual band ID, date, year, time of day, nest brood size, total time to complete blood sample (in seconds), hormone enzyme immunoassay plate ID, corticosterone concentration, and mass.
+ 
+  - `Nestling_Morphology.csv`: Individual-level data on nestling house wren morphology at fledging. Contains columns for nest ID, site (U - urban, R - rural, N - natural), food treatment (C - control, T - food treated), individual band ID, year, date, time of day, nest brood size, mass, tarsus, and wing length.
+ 
+  - `Nestling_Plasma_Validation.csv`: Concentrations and % Bound values of the corticosterone enzyme immunoassay kit Standard Curve and house wren nestling plasma corticosterone serial dilution for validation.
+ 
+  - `Yolk_Hormones.csv`: Individual-level data on house wren egg yolk hormone levels. Contains columns for sample ID, nest ID, site (U - urban, R - rural, N - natural), food treatment (C - control, T - food treated), egg-laying order, year, date, time of day, hormone enzyme immunoassay plate ID, thyroxine-specific plate ID, nest clutch size, egg mass, yolk mass, corticosterone concentration, testosterone concentration, and thyroxine (T4) concentration.
+ 
+  - `Yolk_Validation.csv`: Concentrations and % Bound values of the corticosterone, testosterone, and thyroxine (T4) enzyme immunoassay kit Standard Curves and house wren serial-spiked yolks for validation. Contains columns for curve type, the number within the Standard or Spiked Yolk Curves, corticosterone concentration, corticosterone % Bound, testosterone concentration, testosterone % Bound, thyroxine (T4) concentration, and thyroxine (T4) % Bound.
+ 
+  - `nest_info.csv`: Nest level information. Contains columns for nest ID, site (U - urban, R - rural, N - natural), food treatment (C - control, T - food treated), year, clutch size, hatch brood size, fledge brood size, date of first egg laid, date of first chick hatch, date of fledging, date the food supplementation tray was installed, total number of days the nest was given food supplementation up to the first egg laid, and notes. 
 
 
 - `Figures`: Contains all R code to replicate figures in the manuscript.
