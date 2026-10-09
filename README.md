@@ -47,6 +47,8 @@ All R code and data within the repository can be found in the corresponding fold
     
   - `Egg_Morphology.R`: Uses `Egg_Morphology.csv` to analyze egg morphology metrics, including mass and volume.
     
+  - `Frass_Biomass.R`: Uses `Frass_20-22.csv` to analyze caterpillar frass biomass.
+    
   - `Nestling_Cort.R`: Uses `Nestling_Cort.csv` to analyze nestling corticosterone data.
     
   - `Nestling_Morphology.R`: Uses `Nestling_Morphology.csv` to analyze nestling morphology metrics, including mass and body condition.
@@ -58,6 +60,4 @@ All R code and data within the repository can be found in the corresponding fold
 
 - `R_Supp`: Contains R scripts for supplementary analyses.
   
-  - `Frass_Biomass.R`: Uses `Frass_20-22.csv` to analyze caterpillar frass biomass.
-    
   - `Nesting_Success.R`: Uses `nest_info.csv` to analyze clutch size, hatching brood size, and fledging brood size.
