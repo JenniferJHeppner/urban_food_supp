@@ -61,3 +61,5 @@ All R code and data within the repository can be found in the corresponding fold
 - `R_Supp`: Contains R scripts for supplementary analyses.
   
   - `Nesting_Success.R`: Uses `nest_info.csv` to analyze clutch size, hatching brood size, and fledging brood size.
+ 
+  - `Cort_Time.R`: Uses `Adult_Cort.csv` and `Nestling_Cort.csv` to analyze the effect of time of day and handling time (bleed time) on adult and nestling corticosterone.
