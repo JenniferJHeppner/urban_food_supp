@@ -25,7 +25,7 @@ All R code and data within the repository can be found in the corresponding fold
  
   - `Nestling_Plasma_Validation.csv`: Concentrations and % Bound values of the corticosterone enzyme immunoassay kit Standard Curve and house wren nestling plasma corticosterone serial dilution for validation.
  
-  - `Yolk_Hormones.csv`: Individual-level data on house wren egg yolk hormone levels. Contains columns for sample ID, nest ID, site (U - urban, R - rural, N - natural), food treatment (C - control, T - food treated), egg-laying order, year, date, time of day, hormone enzyme immunoassay plate ID, thyroxine-specific plate ID, nest clutch size, egg mass, yolk mass, corticosterone concentration, testosterone concentration, and thyroxine (T4) concentration.
+  - `yolk_hormones.csv`: Individual-level data on house wren egg yolk hormone levels. Contains columns for sample ID, nest ID, site (U - urban, R - rural, N - natural), food treatment (C - control, T - food treated), egg-laying order, year, date, time of day, hormone enzyme immunoassay plate ID, thyroxine-specific plate ID, nest clutch size, egg mass, yolk mass, cort_ng/g_yolk (corticosterone concentration normalized per gram of yolk mass), cort_ng/mL (corticosterone reconstituted concentration), test_ng/g_yolk (testosterone concentration normalized per gram of yolk mass), test_ng/mL (testosterone reconstituted concentration), and t4_ng/g_yolk (thyroxine (T4) concentration normalized per gram of yolk mass), t4_ng/mL (thyroxine (T4) reconstituted concentration).
  
   - `Yolk_Validation.csv`: Concentrations and % Bound values of the corticosterone, testosterone, and thyroxine (T4) enzyme immunoassay kit Standard Curves and house wren serial-spiked yolks for validation. Contains columns for curve type, the number within the Standard or Spiked Yolk Curves, corticosterone concentration, corticosterone % Bound, testosterone concentration, testosterone % Bound, thyroxine (T4) concentration, and thyroxine (T4) % Bound.
  
@@ -53,7 +53,7 @@ All R code and data within the repository can be found in the corresponding fold
     
   - `Nestling_Morphology.R`: Uses `Nestling_Morphology.csv` to analyze nestling morphology metrics, including mass and body condition.
     
-  - `Yolk_Hormones_and_Mass.R`: Uses `yolk_hormones.csv` to analyze yolk hormone levels (corticosterone, testosterone, and thyroxine) as well as morphology (mass).
+  - `Yolk_Hormones_and_Mass.R`: Uses `yolk_hormones.csv` to analyze yolk hormone levels normalized per gram of yolk mass (ng/g_yolk - corticosterone, testosterone, and thyroxine) as well as morphology (mass).
   
 
 
@@ -63,3 +63,5 @@ All R code and data within the repository can be found in the corresponding fold
   - `Nesting_Success.R`: Uses `nest_info.csv` to analyze clutch size, hatching brood size, and fledging brood size.
  
   - `Cort_Time.R`: Uses `Adult_Cort.csv` and `Nestling_Cort.csv` to analyze the effect of time of day and handling time (bleed time) on adult and nestling corticosterone.
+    
+  - `Yolk_Hormones_Reconstituted_Dilution_Conc.R`: Uses `yolk_hormones.csv` to analyze yolk hormone reconstituted concentration (ng/mL - corticosterone, testosterone, and thyroxine).
