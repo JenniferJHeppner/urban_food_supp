@@ -11,6 +11,7 @@ library(car)
 library(lubridate)
 library(car)
 library(emmeans)
+library(wesanderson)
 
 # Load "Yolk_Hormones.csv" 
 # Hereon, data file is named "dat"
@@ -26,11 +27,12 @@ dat$date <- as.Date(dat$date, "%m/%d/%y") # modify the format of the date of the
 dat$julian <- yday(dat$date) # create a new column for julian date
 dat$plate <- as.factor(dat$plate) # the EIA plate the sample was on for corticosterone and Testosterone
 dat$plate_T4 <- as.factor(dat$plate_T4) # the EIA plate the sample was on for Thyroxine
-dat$yolk_mass <- as.numeric(dat$yolk_mass) # wet yolk mass measured
+dat$yolk <- as.numeric(dat$yolk) # wet yolk mass measured
 dat$clutch_size <- as.integer(dat$clutch_size) # number of eggs in the entire clutch
-dat$cort <- as.numeric(dat$cort) # corticosterone level measured in yolk
-dat$test <- as.numeric(dat$test) # testosterone level measured in yolk
-dat$t4 <- as.numeric(dat$t4) # thyroxine level measured in yolk
+dat$cort_yolk <- as.numeric(dat$cort_ng.g_yolk) # Mass-Normalized Yolk Corticosterone Concentration
+dat$test_yolk <- as.numeric(dat$test_ng.g_yolk) # Mass-Normalized Yolk Testoerone Concentration
+dat$t4_yolk <- as.numeric(dat$t4_ng.g_yolk) # Mass-Normalized Yolk Thyroxine Concentration
+
 
 # Rename groups
 levels(dat$site)
@@ -39,20 +41,36 @@ levels(dat$trt)
 levels(dat$trt) <- c("Control", "Food")
 
 
+
+
 ################################################################################
-## Yolk Corticosterone
+################################################################################
+## Mass-Normalized Yolk Corticosterone Concentration
+## ng / g yolk
 
 # Visualize
-# Basic plot of yolk Corticosterone across sites and treatment groups
-ggplot(data = dat, aes(x = site, y = cort, colour = trt, group = trt)) +
-  geom_point(position = position_jitterdodge(dodge.width = 0.9)) +
-  stat_summary(fun = mean, geom = "point", size = 5, position=position_dodge(width=0.9), 
-               color = "black", alpha = 0.8) +
-  stat_summary(fun.data = mean_cl_boot, geom = "errorbar", width = 0.1, linewidth = 1, 
-               color = "black", alpha = 0.5, position=position_dodge(width=0.9))
+# Mass-Normalized Yolk Corticosterone Concentration across sites and treatment groups
+pal1 <- c("indianred4", "salmon")
+ggplot(data = dat, aes(x = site, y = cort_yolk, group = trt, shape = trt)) +
+  geom_jitter(aes(colour = trt, shape = trt), size = 4, alpha = 0.6, position = position_jitterdodge(dodge.width = 0.9)) +
+  stat_summary(fun = mean, geom = "point", size = 6, position = position_dodge(width = 0.9),
+               color = "black", alpha = 0.9) +
+  stat_summary(fun.data = mean_cl_boot, geom = "errorbar", width = 0.1, linewidth = 1,
+               color = "black", alpha = 0.9, position = position_dodge(width = 0.9)) +
+  scale_y_continuous(name = 'Mass-Normalized Yolk Corticosterone (ng/g)', breaks = c(1,2,3,4,5,6,7)) +
+  scale_x_discrete(name = 'Site') +
+  labs(color = "Treatment") +
+  scale_color_manual(values = pal1) +
+  theme_classic() +
+  theme(
+    axis.text = element_text(size = 15, face = "bold"),
+    axis.title = element_text(size = 17, colour = "black", face = "bold"),
+    legend.title = element_text(size = 18,
+                                colour="black",face = "bold",vjust = 1),
+    legend.text = element_text(size=13))
 
-# Basic plot of yolk Corticosterone across laying sequence
-ggplot(dat, aes(x = layorder, y = cort, color = trt, group = trt)) +
+# Basic plot of Mass-Normalized Yolk Corticosterone Concentration across laying sequence
+ggplot(dat, aes(x = layorder, y = cort_yolk, color = trt, group = trt)) +
   geom_point(aes(color=trt), position = position_jitterdodge(dodge.width = 0.5)) +
   geom_smooth(method = "lm", aes(colour = trt)) +
   facet_wrap(~site)+
@@ -60,34 +78,51 @@ ggplot(dat, aes(x = layorder, y = cort, color = trt, group = trt)) +
   theme_classic()
  
 
-#################################
-# Generalized Linear Mixed Effect Model of Yolk Corticosterone
-cort_best_model <- glmer(cort ~ site * trt + layorder + clutch_size + julian + year + 
+#########
+# Generalized Linear Mixed Effect Model of Mass-Normalized Yolk Corticosterone Concentration
+cort_yolk_model <- glmer(cort_yolk ~ site * trt + scale(layorder) + scale(clutch_size) + scale(julian) + year + 
                       (1|nest), family = Gamma(link = "log"), data = dat)
-summary(cort_best_model)
-AIC(cort_best_model)
+summary(cort_yolk_model)
+AIC(cort_yolk_model)
 
 # Post Hoc Tests
-post_hoc_yolk_cort <- emmeans(cort_best_model, list(pairwise ~ site * trt))
+post_hoc_yolk_cort <- emmeans(cort_yolk_model, list(pairwise ~ site * trt))
 pairs(post_hoc_yolk_cort, simple = "each")
 plot(post_hoc_yolk_cort)
 
 
 
+
+
 ################################################################################
-## Yolk Testosterone
+################################################################################
+## Mass-Normalized Yolk Testosterone Concentration
+## ng / g yolk
 
 # Visualize
-# Basic plot of yolk Testosterone across sites and treatment groups
-ggplot(data = dat, aes(x = site, y = test, colour = trt, group = trt)) +
-  geom_point(position = position_jitterdodge(dodge.width = 0.9)) +
-  stat_summary(fun = mean, geom = "point", size = 5, position=position_dodge(width=0.9), 
-               color = "black", alpha = 0.8) +
-  stat_summary(fun.data = mean_cl_boot, geom = "errorbar", width = 0.1, linewidth = 1, 
-               color = "black", alpha = 0.5, position=position_dodge(width=0.9))
+# Mass-Normalized Yolk Testosterone Concentration across sites and treatment groups
+pal2 <- wes_palettes$Cavalcanti1
+ggplot(data = dat, aes(x = site, y = test_yolk, group = trt, shape = trt)) +
+  geom_jitter(aes(colour = trt, shape = trt), size = 4, alpha = 0.6, position = position_jitterdodge(dodge.width = 0.9)) +
+  stat_summary(fun = mean, geom = "point", size = 6, position = position_dodge(width = 0.9),
+               color = "black", alpha = 0.9) +
+  stat_summary(fun.data = mean_cl_boot, geom = "errorbar", width = 0.1, linewidth = 1,
+               color = "black", alpha = 0.9, position = position_dodge(width = 0.9)) +
+  scale_y_continuous(name = 'Mass-Normalized Yolk Testosterone (ng/g)', breaks = c(2,4,6,8,10,12,14,16)) +
+  scale_x_discrete(name = 'Site') +
+  labs(color = "Treatment") +
+  scale_color_manual(values = pal2[2:3]) +
+  theme_classic() +
+  theme(
+    axis.text = element_text(size = 15, face = "bold"),
+    axis.title = element_text(size = 17, colour = "black", face = "bold"),
+    legend.title = element_text(size = 18,
+                                colour="black",face = "bold",vjust = 1),
+    legend.text = element_text(size=13),
+    legend.position = "none")
 
-# Basic plot of yolk Testosterone across laying sequence
-ggplot(dat, aes(x = layorder, y = test, color = trt, group = trt)) +
+# Basic plot of Mass-Normalized Yolk Testosterone Concentration across laying sequence
+ggplot(dat, aes(x = layorder, y = test_yolk, color = trt, group = trt)) +
   geom_point(aes(color=trt), position = position_jitterdodge(dodge.width = 0.5)) +
   geom_smooth(method = "lm", aes(colour = trt)) +
   facet_wrap(~site)+
@@ -95,73 +130,99 @@ ggplot(dat, aes(x = layorder, y = test, color = trt, group = trt)) +
   theme_classic()
 
 
-#################################
-# Generalized Linear Mixed Effect Model of Yolk Testosterone
-test_best_model <- glmer(test ~ site * trt + layorder + clutch_size + julian + year +
+########
+# Generalized Linear Mixed Effect Model of Mass-Normalized Yolk Testosterone Concentration
+test_yolk_model <- glmer(test_yolk ~ site * trt + scale(layorder) + scale(clutch_size) + scale(julian)+ year +
                       (1|nest), family = Gamma(link = "log"), data = dat)
-summary(test_best_model)
-AIC(test_best_model)
+summary(test_yolk_model)
+AIC(test_yolk_model)
 
 # Post Hoc Tests
-post_hoc_yolk_test <- emmeans(test_best_model, list(pairwise ~ site * trt))
+post_hoc_yolk_test <- emmeans(test_yolk_model, list(pairwise ~ site * trt))
 pairs(post_hoc_yolk_test, simple = "each")
 plot(post_hoc_yolk_test)
 
 
 
+
 ################################################################################
-## Yolk Thyroxine
+################################################################################
+## Mass-Normalized Yolk Thyroxine Concentration
+## ng / g yolk
 
 # Visualize
-# Basic plot of yolk Thyroxine across sites and treatment groups
-ggplot(data = dat, aes(x = site, y = t4, colour = trt, group = trt)) +
-  geom_point(position = position_jitterdodge(dodge.width = 0.9)) +
-  stat_summary(fun = mean, geom = "point", size = 5, position=position_dodge(width=0.9), 
-               color = "black", alpha = 0.8) +
-  stat_summary(fun.data = mean_cl_boot, geom = "errorbar", width = 0.1, linewidth = 1, 
-               color = "black", alpha = 0.5, position=position_dodge(width=0.9)) +
-  scale_y_continuous(breaks = c(0,1,2,3,4,5,6,7)) +
-  theme_classic()
+# Mass-Normalized Yolk Thyroxine Concentration across sites and treatment groups
+pal3 <- c("steelblue", "lightsteelblue")
+ggplot(data = dat, aes(x = site, y = t4_yolk, group = trt, shape = trt)) +
+  geom_jitter(aes(colour = trt, shape = trt), size = 4, alpha = 0.7, position = position_jitterdodge(dodge.width = 0.9)) +
+  stat_summary(fun = mean, geom = "point", size = 6, position = position_dodge(width = 0.9),
+               color = "black", alpha = 0.9) +
+  stat_summary(fun.data = mean_cl_boot, geom = "errorbar", width = 0.1, linewidth = 1,
+               color = "black", alpha = 0.9, position = position_dodge(width = 0.9)) +
+  scale_y_continuous(name = 'Mass-Normalized Yolk Thyroxine (ng/g)', breaks = c(0,1,2,3,4,5,6,7,8,9)) +
+  scale_x_discrete(name = 'Site') +
+  labs(color = "Treatment") +
+  scale_color_manual(values = pal3) +
+  theme_classic() +
+  theme(
+    axis.text = element_text(size = 15, face = "bold"),
+    axis.title = element_text(size = 17, colour = "black", face = "bold"),
+    legend.title = element_text(size = 18,
+                                colour="black",face = "bold",vjust = 1),
+    legend.text = element_text(size=13),
+    legend.position = "none")
 
-# Basic plot of yolk Thyroxine across laying sequence
-ggplot(dat, aes(x = layorder, y = t4, color = trt, group = trt)) +
+# Basic plot of Mass-Normalized Yolk Thyroxine Concentration across laying sequence
+ggplot(dat, aes(x = layorder, y = t4_yolk, color = trt, group = trt)) +
   geom_point(aes(color=trt), position = position_jitterdodge(dodge.width = 0.5)) +
   geom_smooth(method = "lm", aes(colour = trt)) +
   facet_wrap(~site)+
-  scale_y_continuous(breaks = c(0,1,2,3,4,5,6,7)) +
+  scale_y_continuous(breaks = c(0,1,2,3,4,5,6,7,8,9)) +
   theme_classic()
 
 
 #################################
-# Generalized Linear Mixed Effect Model of Yolk Thyroxine
-t4_best_model <- glmer(t4 ~ site * trt + layorder + clutch_size + julian + year + 
+# Generalized Linear Mixed Effect Model of Mass-Normalized Yolk Thyroxine Concentration
+t4_yolk_model <- glmer(t4_yolk ~ site * trt + scale(layorder) + scale(clutch_size) + scale(julian) + year + 
                       (1|nest), family = Gamma(link = "log"), data = dat)
-summary(t4_best_model)
-AIC(t4_best_model)
+summary(t4_yolk_model)
+AIC(t4_yolk_model)
 
 # Post Hoc Tests
-post_hoc_yolk_t4 <- emmeans(t4_best_model, list(pairwise ~ site + trt))
+post_hoc_yolk_t4 <- emmeans(t4_yolk_model, list(pairwise ~ site + trt))
 pairs(post_hoc_yolk_t4, simple = "each")
 plot(post_hoc_yolk_t4)
 
 
 
+
+################################################################################
 ################################################################################
 ## Yolk Mass
 
 # Visualize
-# Basic plot of yolk mass across sites and treatment groups
-ggplot(data = dat, aes(x = site, y = yolk_mass, colour = trt, group = trt)) +
-  geom_point(position = position_jitterdodge(dodge.width = 0.9)) +
-  stat_summary(fun = mean, geom = "point", size = 5, position=position_dodge(width=0.9), 
-               color = "black", alpha = 0.8) +
-  stat_summary(fun.data = mean_cl_boot, geom = "errorbar", width = 0.1, linewidth = 1, 
-               color = "black", alpha = 0.5, position=position_dodge(width=0.9)) +
-  scale_y_continuous(breaks = c(0,1,2,3,4,5,6,7)) +
-  theme_classic()
+# Yolk mass across sites and treatment groups
+pal4 <- c("#999999",  "#008176")
+ggplot(data = dat, aes(x = site, y = yolk, group = trt, shape = trt)) +
+  geom_jitter(aes(colour = trt, shape = trt), size = 4, alpha = 0.6, position = position_jitterdodge(dodge.width = 0.9)) +
+  stat_summary(fun = mean, geom = "point", size = 6, position = position_dodge(width = 0.9),
+               color = "black", alpha = 0.9) +
+  stat_summary(fun.data = mean_cl_boot, geom = "errorbar", width = 0.1, linewidth = 1,
+               color = "black", alpha = 0.9, position = position_dodge(width = 0.9)) +
+  scale_y_continuous(name = 'Yolk Mass (g)', breaks = c(0.25, 0.3, 0.35)) +
+  scale_x_discrete(name = 'Site') +
+  labs(color = "Treatment") +
+  scale_color_manual(values = pal4) +
+  theme_classic() +
+  theme(
+    axis.text = element_text(size = 15, face = "bold"),
+    axis.title = element_text(size = 17, colour = "black", face = "bold"),
+    legend.title = element_text(size = 18,
+                                colour="black",face = "bold",vjust = 1),
+    legend.text = element_text(size=13))
 
 # Basic plot of yolk mass across laying sequence
-ggplot(dat, aes(x = layorder, y = yolk_mass, color = trt, group = trt)) +
+ggplot(dat, aes(x = layorder, y = yolk, color = trt, group = trt)) +
   geom_point(aes(color=trt), position = position_jitterdodge(dodge.width = 0.1)) +
   geom_smooth(method = "lm", aes(colour = trt)) +
   facet_wrap(~site)+
@@ -172,7 +233,7 @@ ggplot(dat, aes(x = layorder, y = yolk_mass, color = trt, group = trt)) +
 
 #################################
 # Linear Mixed Effect Model of Yolk Mass
-mass_best_model <- lmer(yolk_mass ~ site * trt + layorder + clutch_size + julian + year + 
+mass_best_model <- lmer(yolk ~ site * trt + layorder + clutch_size + julian + year + 
                      (1|nest), data = dat)
 summary(mass_best_model)
 AIC(mass_best_model)
