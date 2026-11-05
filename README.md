@@ -25,11 +25,13 @@ All R code and data within the repository can be found in the corresponding fold
  
   - `Nestling_Plasma_Validation.csv`: Concentrations and % Bound values of the corticosterone enzyme immunoassay kit Standard Curve and house wren nestling plasma corticosterone serial dilution for validation.
  
-  - `yolk_hormones.csv`: Individual-level data on house wren egg yolk hormone levels. Contains columns for sample ID, nest ID, site (U - urban, R - rural, N - natural), food treatment (C - control, T - food treated), egg-laying order, year, date, time of day, hormone enzyme immunoassay plate ID, thyroxine-specific plate ID, nest clutch size, egg mass, yolk mass, cort_ng/g_yolk (corticosterone concentration normalized per gram of yolk mass), cort_ng/mL (corticosterone reconstituted concentration), test_ng/g_yolk (testosterone concentration normalized per gram of yolk mass), test_ng/mL (testosterone reconstituted concentration), and t4_ng/g_yolk (thyroxine (T4) concentration normalized per gram of yolk mass), t4_ng/mL (thyroxine (T4) reconstituted concentration).
- 
   - `Yolk_Validation.csv`: Concentrations and % Bound values of the corticosterone, testosterone, and thyroxine (T4) enzyme immunoassay kit Standard Curves and house wren serial-spiked yolks for validation. Contains columns for curve type, the number within the Standard or Spiked Yolk Curves, corticosterone concentration, corticosterone % Bound, testosterone concentration, testosterone % Bound, thyroxine (T4) concentration, and thyroxine (T4) % Bound.
  
-  - `nest_info.csv`: Nest level information. Contains columns for nest ID, site (U - urban, R - rural, N - natural), food treatment (C - control, T - food treated), year, clutch size, hatch brood size, fledge brood size, date of first egg laid, date of first chick hatch, date of fledging, date the food supplementation tray was installed, total number of days the nest was given food supplementation up to the first egg laid, and notes. 
+  - `nest_info.csv`: Nest level information. Contains columns for nest ID, site (U - urban, R - rural, N - natural), food treatment (C - control, T - food treated), year, clutch size, hatch brood size, fledge brood size, date of first egg laid, date of first chick hatch, date of fledging, date the food supplementation tray was installed, total number of days the nest was given food supplementation up to the first egg laid, and notes.
+  
+  - `yolk_hormones.csv`: Individual-level data on house wren egg yolk hormone levels. Contains columns for sample ID, nest ID, site (U - urban, R - rural, N - natural), food treatment (C - control, T - food treated), egg-laying order, year, date, time of day, hormone enzyme immunoassay plate ID, thyroxine-specific plate ID, nest clutch size, egg mass, yolk mass, cort_ng/g_yolk (corticosterone concentration normalized per gram of yolk mass), cort_ng/mL (corticosterone reconstituted concentration), test_ng/g_yolk (testosterone concentration normalized per gram of yolk mass), test_ng/mL (testosterone reconstituted concentration), and t4_ng/g_yolk (thyroxine (T4) concentration normalized per gram of yolk mass), t4_ng/mL (thyroxine (T4) reconstituted concentration).
+  
+  - `yolk_hormone_calculations.xlsx`: 
 
 
 - `Figures`: Contains all R code to replicate figures in the manuscript.
