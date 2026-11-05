@@ -91,7 +91,7 @@ testDispersion(simulation_output)  # This will test for over/underdispersion
 
 
 ################################################################################
-## Adult Body Condition
+## Body Condition
 
 #### Calculate Body Condition with chick mass and tarsus ####
 smi  = function (M, L, plot = TRUE, ...)
