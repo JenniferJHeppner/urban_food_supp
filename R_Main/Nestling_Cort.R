@@ -57,6 +57,8 @@ ggplot(data = dat, aes(x = site, y = cort, colour = trt, group = trt)) +
                                 colour="black",face = "bold",vjust = 1),
     legend.text = element_text(size=13))
 
+
+
 #################################
 # Generalized Linear Mixed Effect Model of Nestling Corticosterone
 cort_best_model <- glmer(cort ~ site * trt + mass + brood_size + julian + year +
